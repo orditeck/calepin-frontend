@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import { Header, Menu, Popup, Icon, Grid, Segment } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 
-import Note from "../stores/Note";
+import NoteStore from "../stores/Note";
+import NoteViewer from "../components/NoteViewer";
+import NoteEditor from "../components/NoteEditor";
+import NotesSidebar from "../components/NotesSidebar";
 
-export default Note.subscribe(class extends Component {
+export default NoteStore.subscribe(class extends Component {
 
     componentWillMount() {
-        Note.fetch();
+        NoteStore.set({ loading: true });
+        NoteStore.fetch(() => {
+            NoteStore.set({ loading: false });
+        });
     }
 
     render() {
@@ -14,38 +20,22 @@ export default Note.subscribe(class extends Component {
             <div>
                 <Grid>
                     <Grid.Column width={4}>
-
-                        <Menu attached='top'>
-                            <Popup trigger={
-                                <Menu.Item onClick={() => {}}>
-                                    <Icon name='add' />
-                                </Menu.Item>
-                            } content='New note' inverted />
-                        </Menu>
-
-                        <Menu attached="bottom" vertical className="notes-menu">
-                            <Menu.Item name="promotions" onClick={() => {}}>
-                                <Header as="h4">Promotions</Header>
-                                <p>Check out our new promotions</p>
-                            </Menu.Item>
-
-                            <Menu.Item name="coupons" onClick={() => {}}>
-                                <Header as="h4">Coupons</Header>
-                                <p>Check out our collection of coupons</p>
-                            </Menu.Item>
-
-                            <Menu.Item name="rebates" onClick={() => {}}>
-                                <Header as="h4">Rebates</Header>
-                                <p>Visit our rebate forum for information on claiming rebates</p>
-                            </Menu.Item>
-                        </Menu>
+                        <Segment basic loading={this.props.loading} style={{ padding: '1px' }}>
+                            <NotesSidebar notes={this.props.notes} />
+                        </Segment>
                     </Grid.Column>
 
                     <Grid.Column width={12}>
-                        <Segment>Note content</Segment>
+                        <Segment basic loading={this.props.loading} style={{ padding: '1px' }}>
+                            {
+                                this.props.mode === 'view' ?
+                                    <NoteViewer />
+                                    :
+                                    <NoteEditor />
+                            }
+                        </Segment>
                     </Grid.Column>
                 </Grid>
-
             </div>
         );
     }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Segment } from 'semantic-ui-react';
 
-class App extends Component {
+import AppLoading from "./stores/AppLoading";
+
+export default AppLoading.subscribe(class App extends Component {
     render() {
-        return <div className="app-container">
+        return <Segment basic className="app-container no-padding" loading={this.props.loading}>
             {this.props.children}
-        </div>;
+        </Segment>;
     }
-}
-
-export default App;
+});

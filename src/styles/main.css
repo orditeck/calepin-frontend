@@ -2,7 +2,11 @@
   margin-bottom: 2rem; }
 .app-container > footer {
   margin-top: 2rem; }
-.app-container .ui.vertical.menu.notes-menu {
+
+.ui.vertical.menu.notes-menu {
   width: calc(100% + 2px); }
+
+.ui.segment.no-padding {
+  padding: 0; }
 
 /*# sourceMappingURL=main.css.map */
