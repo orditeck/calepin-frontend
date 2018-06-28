@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
+import history from './helpers/History'
 
 import 'semantic-ui-css/semantic.min.css';
 import './styles/main.css';
@@ -15,7 +16,7 @@ import Logout from './pages/auth/Logout';
 import Notes from './pages/Notes';
 
 ReactDOM.render(
-    <BrowserRouter >
+    <Router history={history}>
         <App>
             <Header />
 
@@ -30,4 +31,4 @@ ReactDOM.render(
 
             <Footer />
         </App>
-    </BrowserRouter>, document.getElementById('root'));
+    </Router>, document.getElementById('root'));

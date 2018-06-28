@@ -1,0 +1,15 @@
+.app-container {
+
+  > header {
+    margin-bottom: 2rem;
+  }
+
+  > footer {
+    margin-top: 2rem;
+  }
+
+  .ui.vertical.menu.notes-menu {
+    width: calc(100% + 2px);
+  }
+
+}

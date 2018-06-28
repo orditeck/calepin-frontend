@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 
 import Auth from '../../stores/Auth';
-import ApiStore from '../../stores/Api';
+import Api from '../../helpers/Api';
 
 export default Auth.subscribe(class extends Component {
     state = { email: '', password: '' };
@@ -12,18 +11,14 @@ export default Auth.subscribe(class extends Component {
 
     handleSubmit = () => {
         let THIS = this;
-        axios.post(`${ApiStore.url}/auth/login`, this.state)
-            .then(function ({ data }) {
-                Auth.setAndSave({
-                    logged_in: true,
-                    user: data.data,
-                    access_token: data.meta.access_token
-                });
-                THIS.redirectIfLoggedIn();
-            })
-            .catch(function (error) {
-                console.log(error);
+        Api.post(`auth/login`, this.state, (status, data) => {
+            Auth.setAndSave({
+                logged_in: true,
+                user: data.data,
+                access_token: data.meta.access_token
             });
+            THIS.redirectIfLoggedIn();
+        })
     };
 
     componentWillMount = () => this.redirectIfLoggedIn();
