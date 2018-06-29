@@ -4,8 +4,8 @@ import AuthStore from './Auth';
 
 export const EmptyNote = {
     id: null,
-    title: null,
-    content: null,
+    title: '',
+    content: ''
 };
 
 export default new class extends AppState {
@@ -14,7 +14,11 @@ export default new class extends AppState {
             last_fetch: null,
             loading: false,
             mode: 'view',
-            editor_mode: 'text',
+
+            editor: {
+                mode: 'markdown',
+                mdeState: null
+            },
 
             notes: [],
 
@@ -22,15 +26,19 @@ export default new class extends AppState {
         });
     }
 
-    fetch(callback) {
-        Api.get('notes', {
-            params: {
-                author_id: AuthStore.get('user').id
+    fetchAll(callback) {
+        Api.get(
+            'notes',
+            {
+                params: {
+                    author_id: AuthStore.get('user').id
+                }
+            },
+            () => {
+                if (typeof callback === 'function') {
+                    callback();
+                }
             }
-        }, () => {
-            if(typeof callback === 'function'){
-                callback();
-            }
-        });
+        );
     }
 }();

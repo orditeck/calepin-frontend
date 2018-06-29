@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "deepmerge": "^2.1.1",
     "draft-js": "^0.10.5",
     "history": "^4.7.2",
     "js-cookie": "^2.2.0",

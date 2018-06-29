@@ -9,7 +9,7 @@ export let DefaultState = {
         id: null,
         first_name: null,
         last_name: null,
-        email: null,
+        email: null
     }
 };
 

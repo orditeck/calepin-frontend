@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Switch, Route } from 'react-router-dom';
-import history from './helpers/History'
+import history from './helpers/History';
 
 import 'semantic-ui-css/semantic.min.css';
 import './styles/main.css';
@@ -31,4 +31,6 @@ ReactDOM.render(
 
             <Footer />
         </App>
-    </Router>, document.getElementById('root'));
+    </Router>,
+    document.getElementById('root')
+);

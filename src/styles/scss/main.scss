@@ -1,24 +1,4 @@
-.app-container {
-
-  > header {
-    margin-bottom: 2rem;
-
-    .ui.menu {
-      border: 0;
-      border-radius: 0;
-    }
-  }
-
-  > footer {
-    margin-top: 2rem;
-  }
-
-}
-
-.ui.vertical.menu.notes-menu {
-  width: calc(100% + 2px);
-}
-
-.ui.segment.no-padding {
-  padding: 0;
-}
+@import "app";
+@import "semantic";
+@import "sidebar";
+@import "editor";
