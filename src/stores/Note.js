@@ -34,11 +34,7 @@ export default new class extends AppState {
                     author_id: AuthStore.get('user').id
                 }
             },
-            () => {
-                if (typeof callback === 'function') {
-                    callback();
-                }
-            }
+            callback
         );
     }
 }();

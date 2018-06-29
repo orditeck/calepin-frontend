@@ -41,19 +41,25 @@ class Api {
         this.beforeRequest();
         return this.service
             .get(path, config)
-            .then(response => callback(response.status, response.data));
+            .then(
+                response =>
+                    typeof callback === 'function' ? callback(response.status, response.data) : null
+            );
     }
 
-    patch(path, payload, callback) {
+    put(path, payload, callback) {
         this.beforeRequest();
         return this.service
             .request({
-                method: 'PATCH',
+                method: 'PUT',
                 url: path,
                 responseType: 'json',
                 data: payload
             })
-            .then(response => callback(response.status, response.data));
+            .then(
+                response =>
+                    typeof callback === 'function' ? callback(response.status, response.data) : null
+            );
     }
 
     post(path, payload, callback) {
@@ -65,7 +71,10 @@ class Api {
                 responseType: 'json',
                 data: payload
             })
-            .then(response => callback(response.status, response.data));
+            .then(
+                response =>
+                    typeof callback === 'function' ? callback(response.status, response.data) : null
+            );
     }
 }
 

@@ -9,9 +9,15 @@ import NotesSidebar from '../components/NotesSidebar';
 export default NoteStore.subscribe(
     class extends Component {
         componentWillMount() {
-            NoteStore.set({ loading: true });
-            NoteStore.fetchAll(() => {
-                NoteStore.set({ loading: false });
+            NoteStore.set({
+                notes: [],
+                loading: true
+            });
+            NoteStore.fetchAll((status, { data }) => {
+                NoteStore.set({
+                    notes: data,
+                    loading: false
+                });
             });
         }
 

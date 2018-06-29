@@ -11,6 +11,39 @@ export default NoteStore.subscribe(
             });
         };
 
+        handleNoteClick = note => () => {
+            NoteStore.set({
+                note: note
+            });
+        };
+
+        renderNotes = () => {
+            const { notes } = this.props;
+
+            if (notes.length === 0) {
+                return (
+                    <Menu.Item onClick={this.handleNewNoteClick}>
+                        <p>Your notes will appear here. Click here to start writing one!</p>
+                    </Menu.Item>
+                );
+            } else {
+                return notes.map(note => {
+                    return (
+                        <Menu.Item
+                            key={`sidebarnote-${note.id}`}
+                            onClick={this.handleNoteClick(note)}
+                        >
+                            <Header>{note.title}</Header>
+                            <p>
+                                {note.content.substr(0, 100) +
+                                    (note.content.length > 100 ? '\u2026' : '')}
+                            </p>
+                        </Menu.Item>
+                    );
+                });
+            }
+        };
+
         render() {
             return (
                 <div>
@@ -27,20 +60,7 @@ export default NoteStore.subscribe(
                     </Menu>
 
                     <Menu attached="bottom" vertical className="notes-menu">
-                        <Menu.Item name="promotions" onClick={() => {}}>
-                            <Header as="h4">Promotions</Header>
-                            <p>Check out our new promotions</p>
-                        </Menu.Item>
-
-                        <Menu.Item name="coupons" onClick={() => {}}>
-                            <Header as="h4">Coupons</Header>
-                            <p>Check out our collection of coupons</p>
-                        </Menu.Item>
-
-                        <Menu.Item name="rebates" onClick={() => {}}>
-                            <Header as="h4">Rebates</Header>
-                            <p>Visit our rebate forum for information on claiming rebates</p>
-                        </Menu.Item>
+                        {this.renderNotes()}
                     </Menu>
                 </div>
             );
