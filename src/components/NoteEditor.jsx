@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Menu, Popup, Icon } from 'semantic-ui-react';
 
 import MarkdownEditor from './MarkdownEditor';
+import TextEditor from './TextEditor';
 import NoteStore from "../stores/Note";
 
 export default NoteStore.subscribe(class extends Component {
@@ -11,11 +12,9 @@ export default NoteStore.subscribe(class extends Component {
     };
 
     renderEditor = () => {
-
         return this.props.editor_mode === 'text' ?
-            <textarea /> :
+            <TextEditor /> :
             <MarkdownEditor />;
-
     };
 
     render() {

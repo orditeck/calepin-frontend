@@ -13,8 +13,8 @@ __Calepin is currently in active development, anything could break at any moment
 
 There are several ways you can use Calepin.
 
- 1. Use [calepin.orditeck.com](https://calepin.orditeck.com/) services for free. You can encrypt your notes in AES-256 client-side, so the server will never know what's inside your notes.
- 2. Use [calepin.orditeck.com](https://calepin.orditeck.com/) with [your own API](https://github.com/orditeck/calepin-api). You can tell Calepin which server you want to use.
+ 1. Use [calepin.io](https://calepin.io/) services for free. You can encrypt your notes in AES-256 client-side, so the server will never know what's inside your notes.
+ 2. Use [calepin.io](https://calepin.io/) with [your own API](https://github.com/orditeck/calepin-api). You can tell Calepin which server you want to use.
  3. Hosting everything, see below.
 
 ## Host it
@@ -27,7 +27,7 @@ Hosting the front-end is quite simple, it's only HTML/CSS/JS, so you can host it
  4. `npm run build`
  5. Upload the content of the `build` folder to your web server
 
-You can then either use the [Calepin public API](https://calepin.orditeck.com/) or [install the API on your server](https://github.com/orditeck/calepin-api).
+You can then either use the [Calepin public API](https://calepin.io/) or [install the API on your server](https://github.com/orditeck/calepin-api).
 
 ## Contribute to it
 

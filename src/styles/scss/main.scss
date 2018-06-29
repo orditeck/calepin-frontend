@@ -2,6 +2,11 @@
 
   > header {
     margin-bottom: 2rem;
+
+    .ui.menu {
+      border: 0;
+      border-radius: 0;
+    }
   }
 
   > footer {
