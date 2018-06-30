@@ -90,6 +90,7 @@ export default NoteStore.subscribe(
 
         render() {
             const options = [
+                { key: 'raw', text: 'raw (no highlight)', value: 'raw' },
                 { key: 'bash', text: 'bash', value: 'bash' },
                 { key: 'coffeescript', text: 'coffeescript', value: 'coffeescript' },
                 { key: 'css', text: 'css', value: 'css' },

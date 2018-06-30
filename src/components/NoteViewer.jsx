@@ -60,23 +60,29 @@ export default NoteStore.subscribe(
 
             if (!note) return 'Select or create a new note.';
 
-            if (note.language === 'markdown') {
-                return (
-                    <div className="mde-preview">
-                        <div
-                            className="mde-preview-content"
-                            dangerouslySetInnerHTML={{
-                                __html: NoteStore.markdownConverter.makeHtml(note.content)
-                            }}
-                        />
-                    </div>
-                );
-            } else {
-                return (
-                    <SyntaxHighlighter language={note.language} style={docco}>
-                        {note.content}
-                    </SyntaxHighlighter>
-                );
+            switch (note.language) {
+                case 'markdown':
+                    return (
+                        <div className="mde-preview">
+                            <div
+                                className="mde-preview-content"
+                                dangerouslySetInnerHTML={{
+                                    __html: NoteStore.markdownConverter.makeHtml(note.content)
+                                }}
+                            />
+                        </div>
+                    );
+                    break;
+                case 'raw':
+                case 'text':
+                    return <div>{note.content}</div>;
+                    break;
+                default:
+                    return (
+                        <SyntaxHighlighter language={note.language} style={docco}>
+                            {note.content}
+                        </SyntaxHighlighter>
+                    );
             }
         };
 
