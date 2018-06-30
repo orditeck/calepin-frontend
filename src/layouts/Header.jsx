@@ -13,7 +13,7 @@ export default Auth.subscribe(
                 <header>
                     <Menu>
                         <div className="ui container">
-                            <Menu.Item header>Calepin</Menu.Item>
+                            <Menu.Item header as={Link} name="Calepin" to="/" />
                             {!logged_in ? (
                                 <Menu.Item as={Link} name="Login" to="/auth/login" />
                             ) : (

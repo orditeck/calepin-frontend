@@ -9,16 +9,7 @@ import NotesSidebar from '../components/NotesSidebar';
 export default NoteStore.subscribe(
     class extends Component {
         componentWillMount() {
-            NoteStore.set({
-                notes: [],
-                loading: true
-            });
-            NoteStore.fetchAll((status, { data }) => {
-                NoteStore.set({
-                    notes: data,
-                    loading: false
-                });
-            });
+            NoteStore.fetchAll();
         }
 
         render() {
@@ -33,7 +24,7 @@ export default NoteStore.subscribe(
 
                         <Grid.Column width={12}>
                             <Segment basic loading={this.props.loading} style={{ padding: '1px' }}>
-                                {this.props.mode === 'view' ? <NoteViewer /> : <NoteEditor />}
+                                {this.props.mode === 'viewer' ? <NoteViewer /> : <NoteEditor />}
                             </Segment>
                         </Grid.Column>
                     </Grid>

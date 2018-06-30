@@ -30,6 +30,9 @@ class Api {
             case 404:
                 history.push('/404');
                 break;
+            case 422:
+                window.alert(Object.values(error.response.data.errors).join('\r\n'));
+                break;
             default:
                 history.push('/500');
                 break;
@@ -37,44 +40,29 @@ class Api {
         return Promise.reject(error);
     };
 
-    get(path, config, callback) {
+    get(path, config) {
         this.beforeRequest();
-        return this.service
-            .get(path, config)
-            .then(
-                response =>
-                    typeof callback === 'function' ? callback(response.status, response.data) : null
-            );
+        return this.service.get(path, config);
     }
 
-    put(path, payload, callback) {
+    post(path, payload) {
         this.beforeRequest();
-        return this.service
-            .request({
-                method: 'PUT',
-                url: path,
-                responseType: 'json',
-                data: payload
-            })
-            .then(
-                response =>
-                    typeof callback === 'function' ? callback(response.status, response.data) : null
-            );
+        return this.service.request({
+            method: 'POST',
+            url: path,
+            responseType: 'json',
+            data: payload
+        });
     }
 
-    post(path, payload, callback) {
+    put(path, payload) {
         this.beforeRequest();
-        return this.service
-            .request({
-                method: 'POST',
-                url: path,
-                responseType: 'json',
-                data: payload
-            })
-            .then(
-                response =>
-                    typeof callback === 'function' ? callback(response.status, response.data) : null
-            );
+        return this.service.request({
+            method: 'PUT',
+            url: path,
+            responseType: 'json',
+            data: payload
+        });
     }
 }
 

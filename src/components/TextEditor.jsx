@@ -9,8 +9,10 @@ export default NoteStore.subscribe(
         handleValueChange = ({ target }) => {
             NoteStore.set(
                 merge(NoteStore._propsAndValues, {
-                    note: {
-                        content: target.value
+                    editor: {
+                        note: {
+                            content: target.value
+                        }
                     }
                 })
             );
@@ -22,7 +24,7 @@ export default NoteStore.subscribe(
                     <Form.Field
                         control="textarea"
                         rows="15"
-                        value={this.props.note.content}
+                        value={this.props.editor.note.content}
                         onChange={this.handleValueChange}
                         style={{
                             borderTopLeftRadius: 0,

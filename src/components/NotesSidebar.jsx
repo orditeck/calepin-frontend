@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
 import { Header, Menu, Popup, Icon } from 'semantic-ui-react';
+import AuthStore from '../stores/Auth';
 import NoteStore, { EmptyNote } from '../stores/Note';
+import merge from 'deepmerge';
 
 export default NoteStore.subscribe(
     class extends Component {
-        handleNewNoteClick = () => {
-            NoteStore.set({
-                mode: 'editor',
-                note: EmptyNote
-            });
+        newNote = () => {
+            NoteStore.set(
+                merge(NoteStore._propsAndValues, {
+                    mode: 'editor',
+                    editor: {
+                        originalNote: merge(EmptyNote, {
+                            author_id: AuthStore.get('user').id
+                        }),
+                        note: merge(EmptyNote, {
+                            author_id: AuthStore.get('user').id
+                        })
+                    }
+                })
+            );
         };
 
-        handleNoteClick = note => () => {
-            NoteStore.set({
-                note: note
-            });
+        openNote = note => () => {
+            NoteStore.set(
+                merge(NoteStore._propsAndValues, {
+                    mode: 'viewer',
+                    viewer: {
+                        note: note
+                    }
+                })
+            );
         };
 
         renderNotes = () => {
@@ -22,7 +38,7 @@ export default NoteStore.subscribe(
 
             if (notes.length === 0) {
                 return (
-                    <Menu.Item onClick={this.handleNewNoteClick}>
+                    <Menu.Item onClick={this.newNote}>
                         <p>Your notes will appear here. Click here to start writing one!</p>
                     </Menu.Item>
                 );
@@ -30,10 +46,11 @@ export default NoteStore.subscribe(
                 return notes.map(note => {
                     return (
                         <Menu.Item
+                            disabled={this.props.mode === 'editor'}
                             key={`sidebarnote-${note.id}`}
-                            onClick={this.handleNoteClick(note)}
+                            onClick={this.openNote(note)}
                         >
-                            <Header>{note.title}</Header>
+                            <Header size="small">{note.title}</Header>
                             <p>
                                 {note.content.substr(0, 100) +
                                     (note.content.length > 100 ? '\u2026' : '')}
@@ -50,7 +67,7 @@ export default NoteStore.subscribe(
                     <Menu attached="top">
                         <Popup
                             trigger={
-                                <Menu.Item onClick={this.handleNewNoteClick}>
+                                <Menu.Item onClick={this.newNote}>
                                     <Icon name="add" />
                                 </Menu.Item>
                             }

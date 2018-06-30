@@ -1,5 +1,11 @@
-
 .calepin-viewer {
-  white-space: pre-wrap;
+
+  .ui.bottom.attached.segment {
+    white-space: pre-wrap;
+
+    .mde-preview {
+      white-space: normal;
+    }
+  }
 
 }

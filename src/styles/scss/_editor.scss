@@ -10,6 +10,11 @@
 
       > .item {
         width: 100%;
+        padding: 0;
+
+        .ui.selection.dropdown {
+          border: 0;
+        }
       }
     }
 
