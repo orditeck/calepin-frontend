@@ -12,7 +12,7 @@ export default Auth.subscribe(
 
         handleSubmit = () => {
             let THIS = this;
-            Api.post(`auth/login`, this.state, (status, data) => {
+            Api.post(`auth/login`, this.state).then(({ status, data }) => {
                 Auth.setAndSave({
                     logged_in: true,
                     user: data.data,
