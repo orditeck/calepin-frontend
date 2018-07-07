@@ -1,4 +1,4 @@
-# Calepin
+![Calepin](https://i.imgur.com/7c7bXSl.png)
 
 Calepin is a small self-hostable note-taking web app.
 
