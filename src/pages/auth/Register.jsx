@@ -6,13 +6,13 @@ import Api from '../../helpers/Api';
 
 export default Auth.subscribe(
     class extends Component {
-        state = { email: '', password: '' };
+        state = { first_name: '', last_name: '', email: '', password: '' };
 
         handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
         handleSubmit = () => {
             let THIS = this;
-            Api.post(`auth/login`, this.state).then(({ status, data }) => {
+            Api.post(`auth/register`, this.state).then(({ status, data }) => {
                 Auth.setAndSave({
                     logged_in: true,
                     user: data.data,
@@ -31,12 +31,28 @@ export default Auth.subscribe(
         }
 
         render() {
-            const { email, password } = this.state;
+            const { first_name, last_name, email, password } = this.state;
 
             return (
                 <Segment basic>
-                    <h1>Login</h1>
+                    <h1>Register</h1>
                     <Form onSubmit={this.handleSubmit}>
+                        <Form.Input
+                            name="first_name"
+                            label="First name"
+                            type="text"
+                            value={first_name}
+                            onChange={this.handleChange}
+                            required
+                        />
+                        <Form.Input
+                            name="last_name"
+                            label="Last name"
+                            type="text"
+                            value={last_name}
+                            onChange={this.handleChange}
+                            required
+                        />
                         <Form.Input
                             name="email"
                             label="Email"

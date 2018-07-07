@@ -21,7 +21,7 @@ export default NoteStore.subscribe(
 
             if (notes.length === 0) {
                 return (
-                    <Menu.Item onClick={this.newNote}>
+                    <Menu.Item onClick={NoteStore.newNote}>
                         <p>Your notes will appear here. Click here to start writing one!</p>
                     </Menu.Item>
                 );

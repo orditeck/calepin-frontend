@@ -6,29 +6,11 @@ import AppLoading from './stores/AppLoading';
 import AuthStore from './stores/Auth';
 
 import logo from './assets/images/logo.svg';
-import { EmptyNote } from './stores/Note';
-import merge from 'deepmerge';
 import NoteStore from './stores/Note';
 
 export default AuthStore.subscribe(
     AppLoading.subscribe(
         class App extends Component {
-            newNote = () => {
-                NoteStore.set(
-                    merge(NoteStore._propsAndValues, {
-                        mode: 'editor',
-                        editor: {
-                            originalNote: merge(EmptyNote, {
-                                author_id: AuthStore.get('user').id
-                            }),
-                            note: merge(EmptyNote, {
-                                author_id: AuthStore.get('user').id
-                            })
-                        }
-                    })
-                );
-            };
-
             render() {
                 return (
                     <Segment
@@ -43,14 +25,21 @@ export default AuthStore.subscribe(
                                         <img src={logo} alt="Calepin" />
                                     </Menu.Item>
                                     {!this.props.logged_in ? (
-                                        <Menu.Item as={Link} name="Login" to="/auth/login" />
+                                        <React.Fragment>
+                                            <Menu.Item as={Link} name="Login" to="/auth/login" />
+                                            <Menu.Item
+                                                as={Link}
+                                                name="Register"
+                                                to="/auth/register"
+                                            />
+                                        </React.Fragment>
                                     ) : (
                                         <React.Fragment>
                                             <Popup
                                                 trigger={
                                                     <Menu.Item
                                                         name="New note"
-                                                        onClick={this.newNote}
+                                                        onClick={NoteStore.newNote}
                                                     >
                                                         <Icon name="add circle" />
                                                     </Menu.Item>

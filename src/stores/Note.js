@@ -102,4 +102,20 @@ export default new class extends AppState {
                 this.set({ loading: false });
             });
     }
+
+    newNote = () => {
+        this.set(
+            merge(this._propsAndValues, {
+                mode: 'editor',
+                editor: {
+                    originalNote: merge(EmptyNote, {
+                        author_id: AuthStore.get('user').id
+                    }),
+                    note: merge(EmptyNote, {
+                        author_id: AuthStore.get('user').id
+                    })
+                }
+            })
+        );
+    };
 }();

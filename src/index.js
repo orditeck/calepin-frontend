@@ -10,6 +10,7 @@ import App from './App';
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
 import Logout from './pages/auth/Logout';
+import Register from './pages/auth/Register';
 import Notes from './pages/Notes';
 
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
                 <Route exact path="/" component={Home} />
                 <Route path="/auth/login" component={Login} />
                 <Route path="/auth/logout" component={Logout} />
+                <Route path="/auth/register" component={Register} />
                 <Route path="/my-notes" component={Notes} />
             </Switch>
         </App>
