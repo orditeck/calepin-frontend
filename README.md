@@ -1,4 +1,6 @@
-![Calepin](https://i.imgur.com/frOxtcq.png)
+<p align="center">
+ <img src="https://i.imgur.com/frOxtcq.png" alt="Calepin" />
+</p>
 
 Calepin is a small self-hostable note-taking web app.
 
