@@ -29,7 +29,7 @@ Hosting the front-end is quite simple, it's only HTML/CSS/JS, so you can host it
  4. `npm run build`
  5. Upload the content of the `build` folder to your web server
 
-You can then either use the [Calepin public API](https://calepin.io/) or [install the API on your server](https://github.com/orditeck/calepin-api).
+You can then either use the Calepin public API (at https://api.calepin.io/api/v1) or [install the API on your server](https://github.com/orditeck/calepin-api).
 
 ## Contribute to it
 
