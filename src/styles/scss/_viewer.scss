@@ -1,6 +1,13 @@
 .calepin-viewer {
+  height: 100%;
 
-  .ui.bottom.attached.segment {
+  > .segment {
+    height: 100vh;
+    border: 0;
+    box-shadow: none;
+  }
+
+  > .bottom.attached.segment {
     white-space: pre-wrap;
 
     .mde-preview {

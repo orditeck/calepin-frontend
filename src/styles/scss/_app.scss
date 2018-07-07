@@ -1,15 +1,66 @@
 .app-container {
+  > .ui.grid {
+    margin: 0;
 
-  > header {
-    margin-bottom: 2rem;
+    > .column {
+      padding: 0;
 
-    .ui.menu {
-      border: 0;
-      border-radius: 0;
+      &.one.wide {
+        height: 100vh;
+        background: #e7e7e8;
+
+        .vertical.menu {
+          width: auto;
+          background: transparent;
+          box-shadow: none;
+          border: none;
+
+          .item {
+            text-align: center;
+
+            &:before {
+              display: none;
+            }
+
+            &:first-of-type {
+              margin-bottom: 20px;
+            }
+
+            i {
+              font-size: 30px;
+              color: #5352a0;
+            }
+          }
+        }
+      }
+
+      &.fifteen.wide {
+        > .segment {
+          padding: 0;
+
+          .grid {
+            margin: 0;
+
+            .column {
+              padding: 0;
+
+              > .segment {
+                padding: 0;
+              }
+
+              &.four.wide {
+                @import "sidebar";
+              }
+
+              &.twelve.wide {
+                @import "viewer-and-editor";
+                @import "viewer";
+                @import "editor";
+              }
+            }
+          }
+        }
+      }
     }
-  }
-
-  > footer {
-    margin-top: 2rem;
   }
 }

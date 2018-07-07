@@ -1,27 +1,10 @@
 import React, { Component } from 'react';
-import { Header, Menu, Popup, Icon } from 'semantic-ui-react';
-import AuthStore from '../stores/Auth';
-import NoteStore, { EmptyNote } from '../stores/Note';
+import { Header, Menu } from 'semantic-ui-react';
+import NoteStore from '../stores/Note';
 import merge from 'deepmerge';
 
 export default NoteStore.subscribe(
     class extends Component {
-        newNote = () => {
-            NoteStore.set(
-                merge(NoteStore._propsAndValues, {
-                    mode: 'editor',
-                    editor: {
-                        originalNote: merge(EmptyNote, {
-                            author_id: AuthStore.get('user').id
-                        }),
-                        note: merge(EmptyNote, {
-                            author_id: AuthStore.get('user').id
-                        })
-                    }
-                })
-            );
-        };
-
         openNote = note => () => {
             NoteStore.set(
                 merge(NoteStore._propsAndValues, {
@@ -63,23 +46,9 @@ export default NoteStore.subscribe(
 
         render() {
             return (
-                <div>
-                    <Menu attached="top">
-                        <Popup
-                            trigger={
-                                <Menu.Item onClick={this.newNote}>
-                                    <Icon name="add" />
-                                </Menu.Item>
-                            }
-                            content="New note"
-                            inverted
-                        />
-                    </Menu>
-
-                    <Menu attached="bottom" vertical className="notes-menu">
-                        {this.renderNotes()}
-                    </Menu>
-                </div>
+                <React.Fragment>
+                    <Menu vertical>{this.renderNotes()}</Menu>
+                </React.Fragment>
             );
         }
     }
