@@ -9,14 +9,14 @@ It is based on two packages:
  - The API, [calepin-api](https://github.com/orditeck/calepin-api). RESTful PHP API using Laravel 5.6.
  - The web app, [calepin-frontend](https://github.com/orditeck/calepin-frontend). Using React.
 
-__Calepin is currently in active development, anything could break at any moment.__
+__Calepin is currently in active development, anything could break at any moment. You may try our services but do not store anything important as your account and all its data could be deleted at any moment.__
 
 ## Use it
 
 There are several ways you can use Calepin.
 
- 1. Use [calepin.io](https://calepin.io/) services for free. You can encrypt your notes in AES-256 client-side, so the server will never know what's inside your notes.
- 2. Use [calepin.io](https://calepin.io/) with [your own API](https://github.com/orditeck/calepin-api). You can tell Calepin which server you want to use.
+ 1. Use [calepin.io](https://app.calepin.io/) services for free. You can encrypt your notes in AES-256 client-side, so the server will never know what's inside your notes.
+ 2. Use [calepin.io](https://app.calepin.io/) with [your own API](https://github.com/orditeck/calepin-api). You can tell Calepin which server you want to use.
  3. Hosting everything, see below.
 
 ## Host it
