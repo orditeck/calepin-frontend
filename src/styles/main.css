@@ -36,14 +36,9 @@
               border-top: 0;
               border-bottom: 0;
               border-radius: 0; }
-          .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-viewer > .top.menu,
-          .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .top.menu {
-            border-top: none;
-            border-left: none;
-            border-radius: 0; }
-          .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-viewer > .bottom.attached.segment,
-          .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .bottom.attached.segment {
-            height: calc(100vh - 40px);
+          .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor,
+          .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-viewer {
+            height: calc(100vh);
             overflow-y: scroll;
             overflow-x: hidden; }
           .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-viewer {
@@ -52,23 +47,15 @@
               height: 100vh;
               border: 0;
               box-shadow: none; }
+            .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-viewer > .top.menu {
+              border-top: none;
+              border-left: none;
+              border-radius: 0; }
             .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-viewer > .bottom.attached.segment {
+              height: calc(100vh - 40px);
               white-space: pre-wrap; }
               .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-viewer > .bottom.attached.segment .mde-preview {
                 white-space: normal; }
-          .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .ui.secondary.top.attached.menu > .left.menu {
-            width: 100%; }
-            .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .ui.secondary.top.attached.menu > .left.menu > .item {
-              width: 100%;
-              padding: 0; }
-              .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .ui.secondary.top.attached.menu > .left.menu > .item .ui.selection.dropdown {
-                border: 0; }
-          .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .ui.secondary.top.attached.menu > .right.menu .item {
-            margin: 0; }
-            .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .ui.secondary.top.attached.menu > .right.menu .item.icon-only > i.icon {
-              margin: 0; }
-            .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .ui.secondary.top.attached.menu > .right.menu .item:last-of-type {
-              margin-right: .35714286em; }
           .app-container > .ui.grid > .column.fifteen.wide > .segment .grid .column.twelve.wide .calepin-editor > .ui.bottom.attached.segment {
             border: 0;
             padding: 0; }

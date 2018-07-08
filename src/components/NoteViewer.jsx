@@ -1,34 +1,29 @@
 import React, { Component } from 'react';
-import merge from 'deepmerge';
-import { Segment, Menu, Icon } from 'semantic-ui-react';
+import { Segment, Menu, Icon, Message } from 'semantic-ui-react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/styles/hljs';
+import CryptoJS from 'crypto-js';
 
-import NoteStore, { EmptyNote } from '../stores/Note';
+import AuthStore from '../stores/Auth';
+import NoteStore from '../stores/Note';
 
 export default NoteStore.subscribe(
     class extends Component {
-        handleEdit = () => {
-            NoteStore.set(
-                merge(NoteStore._propsAndValues, {
-                    mode: 'editor',
-                    editor: {
-                        originalNote: this.props.viewer.note,
-                        note: this.props.viewer.note
-                    }
-                })
-            );
-        };
+        handleEdit = () =>
+            NoteStore.mergeSet({
+                mode: 'editor',
+                editor: {
+                    originalNote: this.props.viewer.note,
+                    note: this.props.viewer.note
+                }
+            });
 
-        handleClose = () => {
-            NoteStore.set(
-                merge(NoteStore._propsAndValues, {
-                    viewer: {
-                        note: null
-                    }
-                })
-            );
-        };
+        handleClose = () =>
+            NoteStore.mergeSet({
+                viewer: {
+                    note: null
+                }
+            });
 
         renderTopMenu = () => {
             return this.props.viewer.note ? (
@@ -60,6 +55,19 @@ export default NoteStore.subscribe(
 
             if (!note) return 'Select or create a new note.';
 
+            if (note.encrypted && !AuthStore.get('encryption_key'))
+                return (
+                    <Message>
+                        <Message.Header>Encrypted note</Message.Header>
+                        <p>You must provide your encryption key to view this note.</p>
+                    </Message>
+                );
+
+            if (note.encrypted) {
+                let bytes = CryptoJS.AES.decrypt(note.content, AuthStore.get('encryption_key'));
+                note.content = bytes.toString(CryptoJS.enc.Utf8);
+            }
+
             switch (note.language) {
                 case 'markdown':
                     return (
@@ -72,11 +80,9 @@ export default NoteStore.subscribe(
                             />
                         </div>
                     );
-                    break;
                 case 'raw':
                 case 'text':
                     return <div>{note.content}</div>;
-                    break;
                 default:
                     return (
                         <SyntaxHighlighter language={note.language} style={docco}>

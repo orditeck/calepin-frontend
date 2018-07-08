@@ -27,6 +27,9 @@ export default NoteStore.subscribe(
                 );
             } else {
                 return notes.map(note => {
+                    const shortContent = note.encrypted
+                        ? 'Encrypted note'
+                        : note.content.substr(0, 100) + (note.content.length > 100 ? '\u2026' : '');
                     return (
                         <Menu.Item
                             disabled={this.props.mode === 'editor'}
@@ -34,10 +37,7 @@ export default NoteStore.subscribe(
                             onClick={this.openNote(note)}
                         >
                             <Header size="small">{note.title}</Header>
-                            <p>
-                                {note.content.substr(0, 100) +
-                                    (note.content.length > 100 ? '\u2026' : '')}
-                            </p>
+                            <p>{shortContent}</p>
                         </Menu.Item>
                     );
                 });

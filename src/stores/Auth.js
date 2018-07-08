@@ -4,6 +4,7 @@ import cookie from 'js-cookie/src/js.cookie';
 export let DefaultState = {
     logged_in: false,
     access_token: null,
+    encryption_key: '',
 
     user: {
         id: null,

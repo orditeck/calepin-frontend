@@ -3,13 +3,16 @@ import merge from 'deepmerge';
 import Api from '../helpers/Api';
 import AuthStore from './Auth';
 import Showdown from 'showdown';
+import CryptoJS from 'crypto-js';
 
 export const EmptyNote = {
     id: null,
     title: '',
     content: '',
     author_id: null,
-    language: null
+    language: null,
+    encrypted: false,
+    public: false
 };
 
 export default new class extends AppState {
@@ -33,7 +36,8 @@ export default new class extends AppState {
                 mode: 'markdown',
                 mdeState: null,
                 originalNote: null,
-                note: null
+                note: null,
+                encryptionKey: ''
             },
 
             viewer: {
@@ -42,6 +46,10 @@ export default new class extends AppState {
 
             notes: []
         });
+    }
+
+    mergeSet(propsAndValues, callback) {
+        this.set(merge(this._propsAndValues, propsAndValues), callback);
     }
 
     fetchAll() {
@@ -65,7 +73,25 @@ export default new class extends AppState {
 
     add() {
         this.set({ loading: true });
-        Api.post(`notes`, this.get('editor').note)
+
+        let noteToSubmit = this.get('editor').note;
+
+        // Encrypt
+        if (noteToSubmit.encrypted) {
+            const encryptionKey = AuthStore.get('encryption_key');
+
+            if (!encryptionKey) {
+                alert("You're trying to add a encrypted note without an encryption key. Abording.");
+                return;
+            }
+
+            noteToSubmit.content = CryptoJS.AES.encrypt(
+                noteToSubmit.content,
+                encryptionKey
+            ).toString();
+        }
+
+        Api.post(`notes`, noteToSubmit)
             .then(({ status, data }) => {
                 this.set(
                     merge(this._propsAndValues, {

@@ -5,7 +5,7 @@ import history from './History';
 class Api {
     constructor() {
         let service = axios.create({
-            baseURL: 'https://api.calepin.io/api/v1'
+            baseURL: 'https://api.calepin.test/api/v1'
         });
 
         service.interceptors.response.use(this.handleSuccess, this.handleError);

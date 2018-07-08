@@ -1,36 +1,6 @@
 .calepin-editor {
 
-  > .ui.secondary.top.attached.menu {
-    > .left.menu {
-      width: 100%;
-
-      > .item {
-        width: 100%;
-        padding: 0;
-
-        .ui.selection.dropdown {
-          border: 0;
-        }
-      }
-    }
-
-    > .right.menu {
-      .item {
-        margin: 0;
-
-        &.icon-only > i.icon {
-          margin: 0;
-        }
-
-        &:last-of-type {
-          margin-right: .35714286em;
-        }
-      }
-    }
-  }
-
   > .ui.bottom.attached.segment {
-
     .react-mde, .mde-header, .react-mde-vertical-layout .react-mde-content .mde-preview {
       border-color: rgba(34,36,38,.15);
     }
