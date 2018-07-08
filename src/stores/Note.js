@@ -74,24 +74,7 @@ export default new class extends AppState {
     add() {
         this.set({ loading: true });
 
-        let noteToSubmit = this.get('editor').note;
-
-        // Encrypt
-        if (noteToSubmit.encrypted) {
-            const encryptionKey = AuthStore.get('encryption_key');
-
-            if (!encryptionKey) {
-                alert("You're trying to add a encrypted note without an encryption key. Abording.");
-                return;
-            }
-
-            noteToSubmit.content = CryptoJS.AES.encrypt(
-                noteToSubmit.content,
-                encryptionKey
-            ).toString();
-        }
-
-        Api.post(`notes`, noteToSubmit)
+        Api.post(`notes`, this.setEncryptedNote())
             .then(({ status, data }) => {
                 this.set(
                     merge(this._propsAndValues, {
@@ -111,7 +94,7 @@ export default new class extends AppState {
 
     update() {
         this.set({ loading: true });
-        Api.put(`notes/${this.get('editor').note.id}`, this.get('editor').note)
+        Api.put(`notes/${this.get('editor').note.id}`, this.setEncryptedNote())
             .then(({ status, data }) => {
                 this.set(
                     merge(this._propsAndValues, {
@@ -128,6 +111,29 @@ export default new class extends AppState {
                 this.set({ loading: false });
             });
     }
+
+    setEncryptedNote = () => {
+        let noteToSubmit = this.get('editor').note;
+
+        // Encrypt
+        if (noteToSubmit.encrypted) {
+            const encryptionKey = AuthStore.get('encryption_key');
+
+            if (!encryptionKey) {
+                alert(
+                    "You're trying to submit an encrypted note without an encryption key. Please set your encryption key in the app settings first then save your note."
+                );
+                return;
+            }
+
+            noteToSubmit.content = CryptoJS.AES.encrypt(
+                noteToSubmit.content,
+                encryptionKey
+            ).toString();
+        }
+
+        return noteToSubmit;
+    };
 
     newNote = () => {
         this.set(
