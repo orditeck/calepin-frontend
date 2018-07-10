@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-import merge from 'deepmerge';
 import { Form } from 'semantic-ui-react';
 
-import NoteStore from '../stores/Note';
+import { EditorStore } from '../../../stores';
 
-export default NoteStore.subscribe(
+export default EditorStore.subscribe(
     class extends Component {
-        handleValueChange = ({ target }) => {
-            NoteStore.set(
-                merge(NoteStore._propsAndValues, {
-                    editor: {
-                        note: {
-                            content: target.value
-                        }
-                    }
-                })
-            );
-        };
+        handleValueChange = ({ target }) =>
+            EditorStore.set({
+                note: {
+                    ...EditorStore.get('note'),
+                    content: target.value
+                }
+            });
 
         render() {
             return (
@@ -24,7 +19,7 @@ export default NoteStore.subscribe(
                     <Form.Field
                         control="textarea"
                         rows="15"
-                        value={this.props.editor.note.content}
+                        value={this.props.note.content}
                         onChange={this.handleValueChange}
                         style={{
                             borderTopLeftRadius: 0,

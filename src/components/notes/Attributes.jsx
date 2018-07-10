@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Menu, Popup, Icon, Form, Select, Checkbox, Confirm } from 'semantic-ui-react';
-import AuthStore from '../stores/Auth';
-import NoteStore from '../stores/Note';
-import History from '../helpers/History';
+import { AuthStore, EditorStore } from '../../stores';
+import { Notes } from '../../models';
+import History from '../../helpers/History';
+import RawSegment from '../RawSegment';
 
-export default NoteStore.subscribe(
+export default EditorStore.subscribe(
     class extends Component {
         state = {
             encryptionModalOpen: false
@@ -37,25 +38,21 @@ export default NoteStore.subscribe(
         ];
 
         toggleEditorMode = mode => () =>
-            NoteStore.mergeSet({
-                editor: {
-                    mode: mode
-                }
+            EditorStore.set({
+                mode: mode
             });
 
         handleSave = () => {
-            if (this.props.editor.note.id) {
-                NoteStore.update();
-            } else {
-                NoteStore.add();
-            }
+            EditorStore.set({ loading: true });
+            Notes.save(this.props.note).then(() => {
+                EditorStore.set({
+                    loading: false
+                });
+            });
         };
 
         handleClose = () => {
-            if (
-                JSON.stringify(this.props.editor.note) !==
-                JSON.stringify(this.props.editor.originalNote)
-            ) {
+            if (JSON.stringify(this.props.note) !== JSON.stringify(this.props.originalNote)) {
                 if (
                     window.confirm(
                         "There are unsaved changed to your note, if you continue, you'll lose those changes. Do you want to continue?"
@@ -68,43 +65,36 @@ export default NoteStore.subscribe(
             }
         };
 
-        discard = () =>
-            NoteStore.mergeSet({
-                mode: 'viewer',
-                editor: {
-                    originalNote: null,
-                    note: null
-                },
-                viewer: {
-                    note: this.props.editor.originalNote.id ? this.props.editor.originalNote : null
-                }
-            });
+        discard = () => {
+            if (this.props.originalNote.id) {
+                History.push(`/notes/view/${this.props.originalNote.id}`);
+            } else {
+                History.push(`/notes`);
+            }
+        };
 
         onNoteChange = e =>
-            NoteStore.mergeSet({
-                editor: {
-                    note: {
-                        [e.target.name]: e.target.value
-                    }
+            EditorStore.set({
+                note: {
+                    ...EditorStore.get('note'),
+                    [e.target.name]: e.target.value
                 }
             });
 
         onLanguageChange = (e, { value }) =>
-            NoteStore.mergeSet({
-                editor: {
-                    note: {
-                        language: value
-                    }
+            EditorStore.set({
+                note: {
+                    ...EditorStore.get('note'),
+                    language: value
                 }
             });
 
         onToggleChange = (e, { name, checked }) => {
             if (checked) this.checkEncryption();
-            NoteStore.mergeSet({
-                editor: {
-                    note: {
-                        [name]: checked
-                    }
+            EditorStore.set({
+                note: {
+                    ...EditorStore.get('note'),
+                    [name]: checked
                 }
             });
         };
@@ -125,7 +115,7 @@ export default NoteStore.subscribe(
 
         render() {
             return (
-                <div className="props-editor">
+                <RawSegment loading={this.props.loading} className="props-editor">
                     <Menu secondary attached="top">
                         <Menu.Item onClick={this.handleSave}>
                             <Icon name="save" /> Save
@@ -166,7 +156,7 @@ export default NoteStore.subscribe(
                             label="Title"
                             placeholder="Title"
                             onChange={this.onNoteChange}
-                            value={this.props.editor.note.title}
+                            value={this.props.note.title}
                         />
                         <Form.Field
                             control={Select}
@@ -175,14 +165,14 @@ export default NoteStore.subscribe(
                             label="Language"
                             placeholder="Language"
                             onChange={this.onLanguageChange}
-                            value={this.props.editor.note.language}
+                            value={this.props.note.language}
                         />
                         <Form.Field
                             control={Checkbox}
                             toggle
                             name="public"
                             label="Public"
-                            defaultChecked={this.props.editor.note.public}
+                            defaultChecked={this.props.note.public}
                             onChange={this.onToggleChange}
                         />
                         <Form.Field
@@ -190,13 +180,13 @@ export default NoteStore.subscribe(
                             toggle
                             name="encrypted"
                             label="Encrypted"
-                            defaultChecked={this.props.editor.note.encrypted}
+                            defaultChecked={this.props.note.encrypted}
                             onChange={this.onToggleChange}
                         />
 
                         {this.renderEncryptionModal()}
                     </Form>
-                </div>
+                </RawSegment>
             );
         }
     }

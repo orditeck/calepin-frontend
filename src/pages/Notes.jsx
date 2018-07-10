@@ -1,43 +1,43 @@
 import React, { Component } from 'react';
-import { Grid, Segment } from 'semantic-ui-react';
+import { Switch, Route } from 'react-router-dom';
+import { Segment } from 'semantic-ui-react';
 
-import NoteStore from '../stores/Note';
-import NoteViewer from '../components/NoteViewer';
-import NoteEditor from '../components/NoteEditor';
-import NoteProps from '../components/NoteProps';
-import NotesSidebar from '../components/NotesSidebar';
-import Auth from '../stores/Auth';
+import Finder from '../components/notes/Finder';
+import Attributes from '../components/notes/Attributes';
+import Viewer from '../components/notes/Viewer';
+import Editor from '../components/notes/Editor';
 
-export default Auth.subscribe(
-    NoteStore.subscribe(
-        class extends Component {
-            componentWillMount() {
-                NoteStore.fetchAll();
-            }
+export default class extends Component {
+    render() {
+        return (
+            <React.Fragment>
+                <div className="page-notes">
+                    <div className="sidebar">
+                        <Switch>
+                            <Route
+                                path={`${this.props.match.url}/(new|edit)/:id?`}
+                                component={Attributes}
+                            />
+                            <Route component={Finder} />
+                        </Switch>
+                    </div>
 
-            render() {
-                return (
-                    <React.Fragment>
-                        <Grid>
-                            <Grid.Column width={4}>
-                                <Segment basic loading={this.props.loading}>
-                                    {this.props.mode === 'viewer' ? (
-                                        <NotesSidebar notes={this.props.notes} />
-                                    ) : (
-                                        <NoteProps />
-                                    )}
-                                </Segment>
-                            </Grid.Column>
-
-                            <Grid.Column width={12}>
-                                <Segment basic loading={this.props.loading}>
-                                    {this.props.mode === 'viewer' ? <NoteViewer /> : <NoteEditor />}
-                                </Segment>
-                            </Grid.Column>
-                        </Grid>
-                    </React.Fragment>
-                );
-            }
-        }
-    )
-);
+                    <div className="main">
+                        <Switch>
+                            <Route
+                                exact
+                                path={`${this.props.match.url}`}
+                                render={() => {
+                                    return <Segment basic>Select or create a new note.</Segment>;
+                                }}
+                            />
+                            <Route path={`${this.props.match.url}/new`} component={Editor} />
+                            <Route path={`${this.props.match.url}/view/:id`} component={Viewer} />
+                            <Route path={`${this.props.match.url}/edit/:id`} component={Editor} />
+                        </Switch>
+                    </div>
+                </div>
+            </React.Fragment>
+        );
+    }
+}

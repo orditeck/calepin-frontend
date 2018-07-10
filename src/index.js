@@ -19,10 +19,13 @@ ReactDOM.render(
         <App>
             <Switch>
                 <Route exact path="/" component={Home} />
+
                 <Route path="/auth/login" component={Login} />
                 <Route path="/auth/logout" component={Logout} />
                 <Route path="/auth/register" component={Register} />
-                <Route path="/my-notes" component={Notes} />
+
+                <Route path="/notes" component={Notes} />
+
                 <Route path="/settings" component={Settings} />
             </Switch>
         </App>

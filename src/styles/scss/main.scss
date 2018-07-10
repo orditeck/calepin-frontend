@@ -1,2 +1,19 @@
-@import "app";
 @import "semantic";
+
+.app-container {
+  display: flex;
+
+  .menu-container {
+    flex: 1;
+    height: 100vh;
+    background: #e7e7e8;
+    width: 100px;
+    @import "components/menu";
+  }
+
+  .page-container {
+    flex: 15;
+  }
+}
+
+@import "pages/notes";

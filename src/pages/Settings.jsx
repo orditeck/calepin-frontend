@@ -13,7 +13,9 @@ export default AuthStore.subscribe(
         render() {
             return (
                 <React.Fragment>
-                    <Segment basic>
+                    <Segment basic className="half-page">
+                        <h1>Settings</h1>
+
                         <Form size="huge">
                             <Form.Field
                                 control="input"

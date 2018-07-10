@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { Menu, Icon, Popup } from 'semantic-ui-react';
 
 import AuthStore from '../stores/Auth';
-
 import logo from '../assets/images/logo.svg';
-import NoteStore from '../stores/Note';
 
 export default AuthStore.subscribe(
     class App extends Component {
@@ -24,7 +22,7 @@ export default AuthStore.subscribe(
                         <React.Fragment>
                             <Popup
                                 trigger={
-                                    <Menu.Item name="New note" onClick={NoteStore.newNote}>
+                                    <Menu.Item as={Link} name="New note" to="/notes/new">
                                         <Icon name="add circle" />
                                     </Menu.Item>
                                 }
@@ -32,7 +30,7 @@ export default AuthStore.subscribe(
                                 inverted
                                 position="right center"
                             />
-                            <Menu.Item as={Link} name="Your notes" to="/my-notes" />
+                            <Menu.Item as={Link} name="Your notes" to="/notes" />
                             <Menu.Item as={Link} name="Settings" to="/settings" />
                             <Menu.Item as={Link} name="Logout" to="/auth/logout" />
                         </React.Fragment>

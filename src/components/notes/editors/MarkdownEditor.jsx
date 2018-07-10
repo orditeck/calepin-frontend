@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
-import merge from 'deepmerge';
 import ReactMde from 'react-mde';
 
 import 'react-mde/lib/styles/css/react-mde-all.css';
-import NoteStore from '../stores/Note';
+import { EditorStore } from '../../../stores';
+import MarkdownConverter from '../../../helpers/MarkdownConverter';
 
-export default NoteStore.subscribe(
+export default EditorStore.subscribe(
     class extends Component {
         state = {
             mdeState: {
-                markdown: this.props.editor.note.content
+                markdown: this.props.note.content
             }
         };
 
         handleValueChange = mdeState => {
             this.setState({ mdeState: mdeState });
-
-            NoteStore.set(
-                merge(NoteStore._propsAndValues, {
-                    editor: {
-                        note: {
-                            content: mdeState.markdown
-                        }
-                    }
-                })
-            );
+            EditorStore.set({
+                note: {
+                    ...EditorStore.get('note'),
+                    content: mdeState.markdown
+                }
+            });
         };
 
         render() {
@@ -33,7 +29,7 @@ export default NoteStore.subscribe(
                     onChange={this.handleValueChange}
                     editorState={this.state.mdeState}
                     generateMarkdownPreview={markdown =>
-                        Promise.resolve(NoteStore.markdownConverter.makeHtml(markdown))
+                        Promise.resolve(MarkdownConverter.makeHtml(markdown))
                     }
                 />
             );

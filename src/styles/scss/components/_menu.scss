@@ -1,0 +1,23 @@
+.vertical.menu {
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+
+  .item {
+    text-align: center;
+
+    &:before {
+      display: none;
+    }
+
+    &:first-of-type {
+      margin-bottom: 20px;
+    }
+
+    i {
+      font-size: 30px;
+      color: #5352a0;
+    }
+  }
+}
