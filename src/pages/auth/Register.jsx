@@ -11,14 +11,13 @@ export default Auth.subscribe(
         handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
         handleSubmit = () => {
-            let THIS = this;
             Api.post(`auth/register`, this.state).then(({ status, data }) => {
-                Auth.setAndSave({
+                Auth.set({
                     logged_in: true,
                     user: data.data,
                     access_token: data.meta.access_token
                 });
-                THIS.redirectIfLoggedIn();
+                this.redirectIfLoggedIn();
             });
         };
 
@@ -26,7 +25,7 @@ export default Auth.subscribe(
 
         redirectIfLoggedIn() {
             if (this.props.logged_in) {
-                this.props.history.push('/my-notes');
+                this.props.history.push('/notes');
             }
         }
 

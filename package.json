@@ -10,7 +10,7 @@
     "history": "^4.7.2",
     "js-cookie": "^2.2.0",
     "react": "^16.4.1",
-    "react-app-state": "0.0.3",
+    "react-app-state": "github:rodrigocfd/react-app-state#master",
     "react-dom": "^16.4.1",
     "react-mde": "^5.7.0",
     "react-router-dom": "^4.3.1",

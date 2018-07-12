@@ -5,7 +5,7 @@ import history from './History';
 class Api {
     constructor() {
         let service = axios.create({
-            baseURL: 'https://api.calepin.io/api/v1'
+            baseURL: 'https://api.calepin.test/api/v1'
         });
 
         service.interceptors.response.use(this.handleSuccess, this.handleError);
@@ -25,7 +25,7 @@ class Api {
     handleError = error => {
         switch (error.response.status) {
             case 401:
-                //history.push('/auth/login');
+                history.push('/auth/login');
                 break;
             case 404:
                 history.push('/404');

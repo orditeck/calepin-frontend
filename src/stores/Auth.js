@@ -8,9 +8,10 @@ export let DefaultState = {
 
     user: {
         id: null,
+        email: null,
         first_name: null,
         last_name: null,
-        email: null
+        previous_login: null
     }
 };
 
@@ -19,7 +20,7 @@ export default new class extends AppState {
         super(cookie.getJSON('AuthState') || DefaultState);
     }
 
-    setAndSave(data) {
+    set(data) {
         super.set(data);
         cookie.set('AuthState', this._propsAndValues, { expires: 7 });
     }

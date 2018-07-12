@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Header, Menu } from 'semantic-ui-react';
-import { ViewerStore } from '../../stores';
+import { HelpStore, ViewerStore } from '../../stores';
 import { Notes } from '../../models';
 import History from '../../helpers/History';
 import RawSegment from '../RawSegment';
@@ -15,7 +15,11 @@ export default ViewerStore.subscribe(
             this.setState({ loading: true });
             Notes.get().then(({ data }) => {
                 this.setState({ loading: false });
-                ViewerStore.set({ notes: data.data });
+                ViewerStore.set({ notes: data.data }, () => {
+                    if (HelpStore.get('renderFirstNoteAlert') === false && !data.data.length) {
+                        HelpStore.set({ renderFirstNoteAlert: true });
+                    }
+                });
             });
         };
 

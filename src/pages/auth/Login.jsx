@@ -11,14 +11,13 @@ export default Auth.subscribe(
         handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
         handleSubmit = () => {
-            let THIS = this;
             Api.post(`auth/login`, this.state).then(({ status, data }) => {
-                Auth.setAndSave({
+                Auth.set({
                     logged_in: true,
                     user: data.data,
                     access_token: data.meta.access_token
                 });
-                THIS.redirectIfLoggedIn();
+                this.redirectIfLoggedIn();
             });
         };
 
