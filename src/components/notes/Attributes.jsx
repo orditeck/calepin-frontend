@@ -105,7 +105,15 @@ export default EditorStore.subscribe(
         renderEncryptionModal = () => (
             <Confirm
                 open={this.state.encryptionModalOpen}
-                onCancel={() => this.setState({ encryptionModalOpen: false })}
+                onCancel={() => {
+                    this.setState({ encryptionModalOpen: false });
+                    EditorStore.set({
+                        note: {
+                            ...EditorStore.get('note'),
+                            encrypted: false
+                        }
+                    });
+                }}
                 onConfirm={() => {
                     History.push('/settings');
                 }}
@@ -172,7 +180,7 @@ export default EditorStore.subscribe(
                             toggle
                             name="public"
                             label="Public"
-                            defaultChecked={this.props.note.public}
+                            checked={this.props.note.public}
                             onChange={this.onToggleChange}
                         />
                         <Form.Field
@@ -180,7 +188,7 @@ export default EditorStore.subscribe(
                             toggle
                             name="encrypted"
                             label="Encrypted"
-                            defaultChecked={this.props.note.encrypted}
+                            checked={this.props.note.encrypted}
                             onChange={this.onToggleChange}
                         />
 

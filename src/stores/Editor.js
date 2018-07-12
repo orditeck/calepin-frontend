@@ -12,11 +12,10 @@ export const EmptyNote = {
 };
 
 const defaultState = {
+    type: 'new',
     mode: 'markdown',
     loading: false,
     mdeState: {
-        draftEditorState: null,
-        html: '',
         markdown: ''
     },
     originalNote: EmptyNote,
@@ -30,6 +29,7 @@ export default new class extends AppState {
 
     new = () =>
         this.set({
+            type: 'new',
             originalNote: {
                 ...EmptyNote,
                 author_id: AuthStore.get('user').id

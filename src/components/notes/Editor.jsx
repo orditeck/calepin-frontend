@@ -10,13 +10,15 @@ export default EditorStore.subscribe(
     class extends Component {
         componentWillMount = () => {
             if (this.props.match.params.id) {
-                EditorStore.set({ loading: true });
+                EditorStore.set({
+                    type: 'edit',
+                    loading: true
+                });
                 Notes.find(this.props.match.params.id).then(({ data }) =>
                     EditorStore.set({
                         loading: false,
                         note: data.data,
                         mdeState: {
-                            ...EditorStore.get('mdeState'),
                             markdown: data.data.content
                         }
                     })
