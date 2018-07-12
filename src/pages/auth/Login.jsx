@@ -26,7 +26,7 @@ export default Auth.subscribe(
 
         redirectIfLoggedIn() {
             if (this.props.logged_in) {
-                this.props.history.push('/my-notes');
+                this.props.history.push('/notes');
             }
         }
 
