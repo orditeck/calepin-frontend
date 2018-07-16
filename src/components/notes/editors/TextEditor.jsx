@@ -10,6 +10,9 @@ export default EditorStore.subscribe(
                 note: {
                     ...EditorStore.get('note'),
                     content: target.value
+                },
+                mdeState: {
+                    markdown: target.value
                 }
             });
 

@@ -29,13 +29,6 @@ export default ViewerStore.subscribe(
             });
 
         handleEdit = () => History.push(`/notes/edit/${this.props.note.id}`);
-        /*NoteStore.mergeSet({
-                mode: 'editor',
-                editor: {
-                    originalNote: this.props.note,
-                    note: this.props.note
-                }
-            });*/
 
         handleClose = () => History.push('/notes');
 
@@ -116,13 +109,13 @@ export default ViewerStore.subscribe(
         };
 
         render() {
-            const note = this.props.note;
+            const { note, loading } = this.props;
 
             return (
-                <div className="calepin-viewer">
+                <Segment loading={loading} className="raw calepin-viewer">
                     {this.renderTopMenu()}
                     <Segment attached={note ? 'bottom' : null}>{this.renderViewer()}</Segment>
-                </div>
+                </Segment>
             );
         }
     }

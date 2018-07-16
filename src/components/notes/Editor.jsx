@@ -20,6 +20,7 @@ export default HelpStore.subscribe(
                         EditorStore.set({
                             loading: false,
                             note: data.data,
+                            originalNote: data.data,
                             mdeState: {
                                 markdown: data.data.content
                             }

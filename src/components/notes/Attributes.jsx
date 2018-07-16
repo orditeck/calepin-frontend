@@ -46,6 +46,7 @@ export default EditorStore.subscribe(
             EditorStore.set({ loading: true });
             Notes.save(this.props.note).then(() => {
                 EditorStore.set({
+                    originalNote: this.props.note,
                     loading: false
                 });
             });
@@ -105,6 +106,8 @@ export default EditorStore.subscribe(
         renderEncryptionModal = () => (
             <Confirm
                 open={this.state.encryptionModalOpen}
+                cancelButton="No, cancel"
+                confirmButton="Yes"
                 onCancel={() => {
                     this.setState({ encryptionModalOpen: false });
                     EditorStore.set({
@@ -117,7 +120,14 @@ export default EditorStore.subscribe(
                 onConfirm={() => {
                     History.push('/settings');
                 }}
-                content="You must specify your encryption key before. Would you like to set one now? Your note won't be lost as long as you keep your page open."
+                content={
+                    <div className="content">
+                        You must specify your encryption key before you can turn on encryption on
+                        your note. Would you like to set one now?<br />
+                        <br />
+                        <strong>Your current changes will be lost.</strong>
+                    </div>
+                }
             />
         );
 

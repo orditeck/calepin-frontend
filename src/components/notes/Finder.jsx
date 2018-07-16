@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Header, Menu } from 'semantic-ui-react';
-import { HelpStore, ViewerStore } from '../../stores';
+import { ViewerStore } from '../../stores';
 import { Notes } from '../../models';
 import History from '../../helpers/History';
+import { checkIfShouldRenderFirstNoteEncryptionNotice } from '../../helpers/Help';
 import RawSegment from '../RawSegment';
 
 export default ViewerStore.subscribe(
@@ -15,11 +16,7 @@ export default ViewerStore.subscribe(
             this.setState({ loading: true });
             Notes.get().then(({ data }) => {
                 this.setState({ loading: false });
-                ViewerStore.set({ notes: data.data }, () => {
-                    if (HelpStore.get('renderFirstNoteAlert') === false && !data.data.length) {
-                        HelpStore.set({ renderFirstNoteAlert: true });
-                    }
-                });
+                ViewerStore.set({ notes: data.data }, checkIfShouldRenderFirstNoteEncryptionNotice);
             });
         };
 
