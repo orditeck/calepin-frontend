@@ -47,3 +47,5 @@ You can then either use the Calepin public API (at https://api.calepin.io/api/v1
 - [ ] Mobile app
 - [ ] A website
 - [ ] UI refactor
+- [ ] Export notes
+- [ ] Import notes
