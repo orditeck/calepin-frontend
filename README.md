@@ -52,3 +52,18 @@ Non-exhaustive and unordered
 - [ ] Export notes
 - [ ] Import notes
 - [ ] Handle custom server when sharing public note
+
+## License
+
+Copyright (C) 2018 Keven "orditeck" Lefebvre
+
+
+
+
+
+
+
+
+
+
+
