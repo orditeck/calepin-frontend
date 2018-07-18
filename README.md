@@ -43,6 +43,7 @@ Non-exhaustive and unordered
 - [ ] Button to clear local/session storage after logout
 - [ ] Tags/folders + folder sharing with navigation
 - [ ] Some kind of pagination on notes listing
+- [ ] Autosave
 - [ ] Notes versionning/history
 - [ ] Mobile friendly
 - [ ] Mobile app
