@@ -39,6 +39,7 @@ You can then either use the Calepin public API (at https://api.calepin.io/api/v1
 
 ## To-do
 
+- [ ] Button to clear local/session storage
 - [ ] Public notes
 - [ ] Notes versionning/history
 - [ ] Mobile friendly
