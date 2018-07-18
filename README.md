@@ -37,10 +37,12 @@ You can then either use the Calepin public API (at https://api.calepin.io/api/v1
  2. `npm install`
  3. `npm run start`
 
-## To-do
+## To-dos
 
+Non-exhaustive and unordered
 - [ ] Button to clear local/session storage after logout
 - [ ] Tags/folders
+- [ ] Some kind of pagination on notes listing
 - [ ] Public notes
 - [ ] Notes versionning/history
 - [ ] Mobile friendly
