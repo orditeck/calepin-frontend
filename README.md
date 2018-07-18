@@ -2,7 +2,7 @@
  <img src="https://i.imgur.com/frOxtcq.png" alt="Calepin" />
 </p>
 
-Calepin is a small self-hostable note-taking web app.
+Calepin is a small open source self-hostable note-taking web app.
 
 It is based on two packages:
 
@@ -56,6 +56,7 @@ Non-exhaustive and unordered
 ## License
 
 Copyright (C) 2018 Keven "orditeck" Lefebvre
+
 
 
 
