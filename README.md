@@ -16,7 +16,7 @@ __Calepin is currently in active development, anything could break at any moment
 There are several ways you can use Calepin.
 
  1. Use [calepin.io](https://app.calepin.io/) services for free. You can encrypt your notes in AES-256 client-side, so the server will never know what's inside your notes.
- 2. Use [calepin.io](https://app.calepin.io/) with [your self-hosted API](https://github.com/orditeck/calepin-api). You can set Calepin to use your API in the settings.
+ 2. Use [calepin.io](https://app.calepin.io/) with [your self-hosted API](https://github.com/orditeck/calepin-api). You can set the API URL in the settings.
  3. Hosting everything, see below.
 
 ## Host it
