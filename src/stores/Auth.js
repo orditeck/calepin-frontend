@@ -1,5 +1,4 @@
 import AppState from 'react-app-state';
-import cookie from 'js-cookie/src/js.cookie';
 
 export let DefaultState = {
     logged_in: false,
@@ -17,11 +16,11 @@ export let DefaultState = {
 
 export default new class extends AppState {
     constructor() {
-        super(cookie.getJSON('AuthState') || DefaultState);
+        super(JSON.parse(sessionStorage.getItem('AuthStore')) || DefaultState);
     }
 
     set(data) {
         super.set(data);
-        cookie.set('AuthState', this._propsAndValues, { expires: 7 });
+        sessionStorage.setItem('AuthStore', JSON.stringify(this._propsAndValues));
     }
 }();

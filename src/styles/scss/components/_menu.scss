@@ -6,6 +6,7 @@
 
   .item {
     text-align: center;
+    padding: 14px 0;
 
     &:before {
       display: none;
@@ -16,8 +17,13 @@
     }
 
     i {
-      font-size: 30px;
+      font-size: 24px;
       color: #5352a0;
+    }
+
+    > img:not(.ui) {
+      max-width: 70%;
+      margin: 0 auto;
     }
   }
 }

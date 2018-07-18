@@ -1,18 +1,16 @@
 import axios from 'axios';
-import AuthStore from '../stores/Auth';
+import { AuthStore, SettingsStore } from '../stores';
 import history from './History';
 
 class Api {
     constructor() {
-        let service = axios.create({
-            baseURL: 'https://api.calepin.io/api/v1'
-        });
-
+        let service = axios.create();
         service.interceptors.response.use(this.handleSuccess, this.handleError);
         this.service = service;
     }
 
     beforeRequest() {
+        this.service.defaults.baseURL = SettingsStore.get('api_url');
         this.service.defaults.headers.common['Authorization'] = AuthStore.get('access_token')
             ? `Bearer ${AuthStore.get('access_token')}`
             : undefined;
@@ -23,19 +21,23 @@ class Api {
     }
 
     handleError = error => {
-        switch (error.response.status) {
-            case 401:
-                history.push('/auth/login');
-                break;
-            case 404:
-                history.push('/404');
-                break;
-            case 422:
-                window.alert(Object.values(error.response.data.errors).join('\r\n'));
-                break;
-            default:
-                history.push('/500');
-                break;
+        if (error.response && error.response.status) {
+            switch (error.response.status) {
+                case 401:
+                    history.push('/auth/login');
+                    break;
+                case 404:
+                    history.push('/404');
+                    break;
+                case 422:
+                    window.alert(Object.values(error.response.data.errors).join('\r\n'));
+                    break;
+                default:
+                    history.push('/500');
+                    break;
+            }
+        } else {
+            history.push('/500');
         }
         return Promise.reject(error);
     };
@@ -63,6 +65,11 @@ class Api {
             responseType: 'json',
             data: payload
         });
+    }
+
+    delete(path, config) {
+        this.beforeRequest();
+        return this.service.delete(path, config);
     }
 }
 

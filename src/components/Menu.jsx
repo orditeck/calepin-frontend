@@ -7,6 +7,19 @@ import logo from '../assets/images/logo.svg';
 
 export default AuthStore.subscribe(
     class App extends Component {
+        renderIconItem = (title, icon, url) => (
+            <Popup
+                trigger={
+                    <Menu.Item as={Link} to={url}>
+                        <Icon name={icon} />
+                    </Menu.Item>
+                }
+                content={title}
+                inverted
+                position="right center"
+            />
+        );
+
         render() {
             return (
                 <Menu icon vertical>
@@ -20,19 +33,10 @@ export default AuthStore.subscribe(
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <Popup
-                                trigger={
-                                    <Menu.Item as={Link} name="New note" to="/notes/new">
-                                        <Icon name="add circle" />
-                                    </Menu.Item>
-                                }
-                                content="New note"
-                                inverted
-                                position="right center"
-                            />
-                            <Menu.Item as={Link} name="Your notes" to="/notes" />
-                            <Menu.Item as={Link} name="Settings" to="/settings" />
-                            <Menu.Item as={Link} name="Logout" to="/auth/logout" />
+                            {this.renderIconItem('Your notes', 'sticky note', '/notes')}
+                            {this.renderIconItem('New note', 'add circle', '/notes/new')}
+                            {this.renderIconItem('Settings', 'settings', '/settings')}
+                            {this.renderIconItem('Logout', 'log out', '/auth/logout')}
                         </React.Fragment>
                     )}
                 </Menu>

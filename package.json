@@ -8,7 +8,6 @@
     "deepmerge": "^2.1.1",
     "draft-js": "^0.10.5",
     "history": "^4.7.2",
-    "js-cookie": "^2.2.0",
     "react": "^16.4.1",
     "react-app-state": "github:rodrigocfd/react-app-state#master",
     "react-dom": "^16.4.1",

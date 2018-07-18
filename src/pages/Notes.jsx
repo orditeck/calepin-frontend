@@ -9,6 +9,8 @@ import Editor from '../components/notes/Editor';
 
 export default class extends Component {
     render() {
+        console.log(this.props);
+
         return (
             <React.Fragment>
                 <div className="page-notes">
@@ -32,7 +34,10 @@ export default class extends Component {
                                 }}
                             />
                             <Route path={`${this.props.match.url}/new`} component={Editor} />
-                            <Route path={`${this.props.match.url}/view/:id`} component={Viewer} />
+                            <Route
+                                path={`${this.props.match.url}/view/:id`}
+                                render={props => <Viewer key={props.match.params.id} {...props} />}
+                            />
                             <Route path={`${this.props.match.url}/edit/:id`} component={Editor} />
                         </Switch>
                     </div>

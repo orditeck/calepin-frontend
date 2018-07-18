@@ -10,21 +10,26 @@
     flex: 1;
     height: 100vh;
     background: #e7e7e8;
-    width: 100px; }
+    width: 80px;
+    max-width: 80px; }
     .app-container .menu-container .vertical.menu {
       width: 100%;
       background: transparent;
       box-shadow: none;
       border: none; }
       .app-container .menu-container .vertical.menu .item {
-        text-align: center; }
+        text-align: center;
+        padding: 14px 0; }
         .app-container .menu-container .vertical.menu .item:before {
           display: none; }
         .app-container .menu-container .vertical.menu .item:first-of-type {
           margin-bottom: 20px; }
         .app-container .menu-container .vertical.menu .item i {
-          font-size: 30px;
+          font-size: 24px;
           color: #5352a0; }
+        .app-container .menu-container .vertical.menu .item > img:not(.ui) {
+          max-width: 70%;
+          margin: 0 auto; }
   .app-container .page-container {
     flex: 15; }
 

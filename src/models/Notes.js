@@ -22,6 +22,10 @@ export default new class {
         return Api[method](url, this.encryptNote(note));
     }
 
+    delete(uuid) {
+        return Api.delete(`notes/${uuid}`);
+    }
+
     encryptNote = note => {
         // Encrypt if needed
         if (note.encrypted) {

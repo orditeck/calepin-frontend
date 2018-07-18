@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Header, Menu } from 'semantic-ui-react';
 import { ViewerStore } from '../../stores';
 import { Notes } from '../../models';
-import History from '../../helpers/History';
-import { checkIfShouldRenderFirstNoteEncryptionNotice } from '../../helpers/Help';
 import RawSegment from '../RawSegment';
 
 export default ViewerStore.subscribe(
@@ -12,22 +10,30 @@ export default ViewerStore.subscribe(
             loading: false
         };
 
-        componentWillMount = () => {
+        componentDidUpdate = prevProps => {
+            if (prevProps.location.pathname !== this.props.location.pathname) {
+                this.refreshNotes();
+            }
+        };
+
+        componentDidMount = () => this.refreshNotes();
+
+        refreshNotes = () => {
             this.setState({ loading: true });
             Notes.get().then(({ data }) => {
                 this.setState({ loading: false });
-                ViewerStore.set({ notes: data.data }, checkIfShouldRenderFirstNoteEncryptionNotice);
+                ViewerStore.set({ notes: data.data });
             });
         };
 
-        openNote = note => () => History.push(`/notes/view/${note.id}`);
+        openNote = note => () => this.props.history.push(`/notes/view/${note.id}`);
 
         renderNotes = () => {
             const { notes } = this.props;
 
             if (notes.length === 0) {
                 return (
-                    <Menu.Item onClick={() => History.push('/notes/new')}>
+                    <Menu.Item onClick={() => this.props.history.push('/notes/new')}>
                         <p>Your notes will appear here. Click here to start writing one!</p>
                     </Menu.Item>
                 );

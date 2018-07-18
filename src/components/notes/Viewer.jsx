@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Menu, Icon, Message } from 'semantic-ui-react';
+import { Segment, Menu, Icon, Message, Modal, Button } from 'semantic-ui-react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/styles/hljs';
 import CryptoJS from 'crypto-js';
@@ -11,6 +11,10 @@ import History from '../../helpers/History';
 
 export default ViewerStore.subscribe(
     class extends Component {
+        state = {
+            renderDeleteConfirm: false
+        };
+
         componentWillMount = () => {
             if (this.props.match.params.id) {
                 ViewerStore.set({ loading: true });
@@ -30,7 +34,38 @@ export default ViewerStore.subscribe(
 
         handleEdit = () => History.push(`/notes/edit/${this.props.note.id}`);
 
+        handleDelete = () => this.setState({ renderDeleteConfirm: true });
+
         handleClose = () => History.push('/notes');
+
+        renderDeleteConfirmation = () => (
+            <Modal
+                open={this.state.renderDeleteConfirm}
+                onClose={() => this.setState({ renderDeleteConfirm: false })}
+            >
+                <Modal.Header>Delete a note</Modal.Header>
+                <Modal.Content>
+                    <p>Are you sure you want to delete this note? This action is not reversible.</p>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button onClick={() => this.setState({ renderDeleteConfirm: false })}>
+                        Nope, wrong button
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            this.setState({ renderDeleteConfirm: false });
+                            ViewerStore.set({ loading: true });
+                            Notes.delete(this.props.note.id).then(() => {
+                                History.push(`/notes`);
+                            });
+                        }}
+                        negative
+                        icon="warning sign"
+                        content="Yes, delete this note"
+                    />
+                </Modal.Actions>
+            </Modal>
+        );
 
         renderTopMenu = () => {
             return this.props.note ? (
@@ -49,6 +84,9 @@ export default ViewerStore.subscribe(
                 <Menu.Menu position="right">
                     <Menu.Item onClick={this.handleEdit}>
                         <Icon name="pencil" /> Edit
+                    </Menu.Item>
+                    <Menu.Item onClick={this.handleDelete}>
+                        <Icon name="trash" /> Delete
                     </Menu.Item>
                     <Menu.Item onClick={this.handleClose}>
                         <Icon name="times" /> Close
@@ -113,6 +151,7 @@ export default ViewerStore.subscribe(
 
             return (
                 <Segment loading={loading} className="raw calepin-viewer">
+                    {this.renderDeleteConfirmation()}
                     {this.renderTopMenu()}
                     <Segment attached={note ? 'bottom' : null}>{this.renderViewer()}</Segment>
                 </Segment>

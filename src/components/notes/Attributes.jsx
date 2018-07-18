@@ -44,9 +44,14 @@ export default EditorStore.subscribe(
 
         handleSave = () => {
             EditorStore.set({ loading: true });
-            Notes.save(this.props.note).then(() => {
+            Notes.save(this.props.note).then(({ data }) => {
+                if (this.props.note.id !== data.data.id) {
+                    History.push(`/notes/edit/${data.data.id}`);
+                }
+
                 EditorStore.set({
-                    originalNote: this.props.note,
+                    note: data.data,
+                    originalNote: data.data,
                     loading: false
                 });
             });

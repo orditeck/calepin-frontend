@@ -6,11 +6,13 @@ import TextEditor from './editors/TextEditor';
 import { EditorStore, HelpStore } from '../../stores';
 import { Notes } from '../../models';
 import History from '../../helpers/History';
+import { checkIfShouldRenderFirstNoteEncryptionNotice } from '../../helpers/Help';
 
 export default HelpStore.subscribe(
     EditorStore.subscribe(
         class extends Component {
             componentWillMount = () => {
+                checkIfShouldRenderFirstNoteEncryptionNotice();
                 if (this.props.match.params.id) {
                     EditorStore.set({
                         type: 'edit',
@@ -30,6 +32,7 @@ export default HelpStore.subscribe(
                     EditorStore.new();
                 }
             };
+
             componentWillUnmount = () => EditorStore.reset();
 
             renderFirstNoteAlert = () => (
