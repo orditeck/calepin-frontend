@@ -2,27 +2,34 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Segment } from 'semantic-ui-react';
 
+import { AuthStore } from '../stores';
 import Finder from '../components/notes/Finder';
 import Attributes from '../components/notes/Attributes';
 import Viewer from '../components/notes/Viewer';
 import Editor from '../components/notes/Editor';
 
 export default class extends Component {
-    render() {
-        console.log(this.props);
+    renderSidebar = () => {
+        if (AuthStore.get('logged_in') === true) {
+            return (
+                <div className="sidebar">
+                    <Switch>
+                        <Route
+                            path={`${this.props.match.url}/(new|edit)/:id?`}
+                            component={Attributes}
+                        />
+                        <Route component={Finder} />
+                    </Switch>
+                </div>
+            );
+        }
+    };
 
+    render() {
         return (
             <React.Fragment>
                 <div className="page-notes">
-                    <div className="sidebar">
-                        <Switch>
-                            <Route
-                                path={`${this.props.match.url}/(new|edit)/:id?`}
-                                component={Attributes}
-                            />
-                            <Route component={Finder} />
-                        </Switch>
-                    </div>
+                    {this.renderSidebar()}
 
                     <div className="main">
                         <Switch>

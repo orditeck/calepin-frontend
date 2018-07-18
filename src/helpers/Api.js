@@ -11,9 +11,11 @@ class Api {
 
     beforeRequest() {
         this.service.defaults.baseURL = SettingsStore.get('api_url');
-        this.service.defaults.headers.common['Authorization'] = AuthStore.get('access_token')
-            ? `Bearer ${AuthStore.get('access_token')}`
-            : undefined;
+        if (AuthStore.get('access_token')) {
+            this.service.defaults.headers.common['Authorization'] = `Bearer ${AuthStore.get(
+                'access_token'
+            )}`;
+        }
     }
 
     handleSuccess(response) {

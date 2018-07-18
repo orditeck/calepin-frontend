@@ -80,7 +80,7 @@ export default ViewerStore.subscribe(
         };
 
         renderButtons = () => {
-            return this.props.note ? (
+            return this.props.note && AuthStore.get('logged_in') === true ? (
                 <Menu.Menu position="right">
                     <Menu.Item onClick={this.handleEdit}>
                         <Icon name="pencil" /> Edit

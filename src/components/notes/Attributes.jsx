@@ -96,7 +96,7 @@ export default EditorStore.subscribe(
             });
 
         onToggleChange = (e, { name, checked }) => {
-            if (checked) this.checkEncryption();
+            if (name === 'encrypted' && checked) this.checkEncryption();
             EditorStore.set({
                 note: {
                     ...EditorStore.get('note'),
