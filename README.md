@@ -41,7 +41,7 @@ You can then either use the Calepin public API (at https://api.calepin.io/api/v1
 
 Non-exhaustive and unordered
 - [ ] Button to clear local/session storage after logout
-- [ ] Tags/folders + folder sharing with navigation
+- [ ] Tags/folders + folder sharing with navigation + search
 - [ ] Some kind of pagination on notes listing
 - [ ] Autosave
 - [ ] Notes versionning/history
