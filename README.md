@@ -43,7 +43,6 @@ Non-exhaustive and unordered
 - [ ] Button to clear local/session storage after logout
 - [ ] Tags/folders
 - [ ] Some kind of pagination on notes listing
-- [ ] Public notes
 - [ ] Notes versionning/history
 - [ ] Mobile friendly
 - [ ] Mobile app
@@ -51,3 +50,4 @@ Non-exhaustive and unordered
 - [ ] UI refactor
 - [ ] Export notes
 - [ ] Import notes
+- [ ] Handle custom server when sharing public note
