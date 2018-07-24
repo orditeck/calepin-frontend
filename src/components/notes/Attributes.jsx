@@ -44,17 +44,21 @@ export default EditorStore.subscribe(
 
         handleSave = () => {
             EditorStore.set({ loading: true });
-            Notes.save(this.props.note).then(({ data }) => {
-                if (this.props.note.id !== data.data.id) {
-                    History.push(`/notes/edit/${data.data.id}`);
-                }
+            Notes.save(this.props.note)
+                .then(({ data }) => {
+                    if (this.props.note.id !== data.data.id) {
+                        History.push(`/notes/edit/${data.data.id}`);
+                    }
 
-                EditorStore.set({
-                    note: data.data,
-                    originalNote: data.data,
-                    loading: false
+                    EditorStore.set({
+                        note: data.data,
+                        originalNote: data.data,
+                        loading: false
+                    });
+                })
+                .catch(() => {
+                    EditorStore.set({ loading: false });
                 });
-            });
         };
 
         handleClose = () => {
