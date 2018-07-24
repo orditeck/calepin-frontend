@@ -31,6 +31,11 @@ Hosting the front-end is quite simple, it's only HTML/CSS/JS, so you can host it
 
 You can then either use the Calepin public API (at https://api.calepin.io/api/v1) or [install the API on your server](https://github.com/orditeck/calepin-api).
 
+If you want to use your own API you can also set it as default.
+
+ 1. Go to `calepin-frontend/src/stores/` and edit `Settings.js`
+ 2. Replace `https://api.calepin.io/api/v1` in line 5 with your own API url
+
 ## Contribute to it
 
  1. `git clone git@github.com:orditeck/calepin-frontend.git`
