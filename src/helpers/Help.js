@@ -10,6 +10,9 @@ export const checkIfShouldRenderFirstNoteEncryptionNotice = function() {
 
 function _checkIfShouldRenderFirstNoteEncryptionNotice() {
     if (HelpStore.get('renderFirstNoteAlert') !== false) {
+        // Default is false, if it's not false, then it's true or something else.
+        // But when it's true, we don't come here. So it's something else than true,
+        // like 'do-not-ask-again'. So no, we should not render the notice
         return false;
     }
 

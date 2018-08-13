@@ -2,7 +2,8 @@ import AppState from 'react-app-state';
 
 export let DefaultState = {
     encryption_key: '',
-    api_url: 'https://api.calepin.io/api/v1'
+    api_url: 'https://api.calepin.io/api/v1',
+    mdeLayout: 'tabbed'
 };
 
 export default new class extends AppState {
