@@ -11,7 +11,7 @@ export const EmptyNote = {
     public: false
 };
 
-const defaultState = {
+export const DefaultState = {
     type: 'new',
     mode: 'markdown',
     loading: false,
@@ -24,7 +24,7 @@ const defaultState = {
 
 export default new class extends AppState {
     constructor() {
-        super(defaultState);
+        super(DefaultState);
     }
 
     new = () =>
@@ -40,5 +40,5 @@ export default new class extends AppState {
             }
         });
 
-    reset = () => this.set(defaultState);
+    reset = () => this.set(DefaultState);
 }();

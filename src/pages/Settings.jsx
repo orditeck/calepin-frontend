@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { Segment, Form, Message } from 'semantic-ui-react';
+import { Segment, Form, Message, Button } from 'semantic-ui-react';
 
 import { SettingsStore } from '../stores';
+import { DefaultState as DefaultSettingsState } from '../stores/Settings';
 
 export default SettingsStore.subscribe(
     class extends Component {
@@ -9,6 +10,8 @@ export default SettingsStore.subscribe(
             SettingsStore.set({
                 [e.target.name]: e.target.value
             });
+
+        reset = () => SettingsStore.set(DefaultSettingsState);
 
         render() {
             return (
@@ -20,9 +23,14 @@ export default SettingsStore.subscribe(
                             warning
                             content={
                                 <Fragment>
-                                    Your settings will remain as long as you don't clear them or
-                                    reset your browser's local storage. You should clear your
-                                    settings after every use if you're on a shared computer.
+                                    Your settings, <strong>including your encryption key</strong>,
+                                    will remain as long as you don't clear them or reset your
+                                    browser's local storage. You should clear your settings after
+                                    every use if you're on a shared computer. You can do this{' '}
+                                    <Button basic compact onClick={this.reset}>
+                                        by clicking here
+                                    </Button>{' '}
+                                    or when logging out.
                                 </Fragment>
                             }
                         />

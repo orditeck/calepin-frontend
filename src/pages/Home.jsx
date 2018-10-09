@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react';
+import { AuthStore } from '../stores';
 
 export default class extends Component {
-    render() {
-        return (
-            <Segment basic>
-                <h1>Welcome!</h1>
+    componentWillMount() {
+        if (AuthStore.get('logged_in')) {
+            this.props.history.push('/notes');
+        } else {
+            this.props.history.push('/login');
+        }
+    }
 
-                <h2>Register or login to continue.</h2>
-            </Segment>
-        );
+    render() {
+        return null;
     }
 }
