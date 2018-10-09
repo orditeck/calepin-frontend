@@ -64,15 +64,3 @@ Non-exhaustive and unordered
 ## License
 
 Copyright (C) 2018 Keven "orditeck" Lefebvre
-
-
-
-
-
-
-
-
-
-
-
-
