@@ -17,7 +17,7 @@
     "react-scripts": "1.1.4",
     "react-syntax-highlighter": "^7.0.4",
     "semantic-ui-css": "^2.3.2",
-    "semantic-ui-react": "^0.81.2",
+    "semantic-ui-react": "^0.87.3",
     "showdown": "^1.8.6"
   },
   "scripts": {
