@@ -12,7 +12,7 @@
     "react": "^16.4.1",
     "react-app-state": "github:rodrigocfd/react-app-state#master",
     "react-dom": "^16.4.1",
-    "react-mde": "^5.7.0",
+    "react-mde": "^8.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-syntax-highlighter": "^7.0.4",
