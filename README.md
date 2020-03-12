@@ -9,7 +9,7 @@ It is based on two packages:
  - The API, [calepin-api](https://github.com/orditeck/calepin-api). RESTful PHP API using Laravel 5.6.
  - The web app, [calepin-frontend](https://github.com/orditeck/calepin-frontend). Using React.
 
-__Calepin is currently in active development, anything could break at any moment. You may try our services but do not store anything important as your account and all its data could be deleted at any moment.__
+__Please note:__ A complete rewrite of Calepin, both frontend & backend, is planned in mid-2020. Star & Watch the repo to get updated on the progress!
 
 ## Use it
 
