@@ -15,7 +15,7 @@
     "react-mde": "^5.7.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "react-syntax-highlighter": "^7.0.4",
+    "react-syntax-highlighter": "^13.2.1",
     "semantic-ui-css": "^2.3.2",
     "semantic-ui-react": "^0.81.2",
     "showdown": "^1.8.6"
